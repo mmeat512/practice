@@ -1,0 +1,55 @@
+body {
+  font-size: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: hsl(212, 45%, 89%);
+}
+
+.qr-code-wrap {
+  /* display: flex; */
+  position: static;
+  width: 290px;
+  border-radius: 1rem;
+  padding: 1em;
+  background: hsl(0, 0%, 100%);
+  margin-bottom: 1em;
+  transform: translate(50%, 50%);
+}
+
+.qr-code-wrap img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.qr-code-wrap .code-name {
+  color: hsl(218, 44%, 22%);
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 0 1em;
+}
+.qr-code-wrap .code-desc {
+  color: hsl(220, 15%, 55%);
+  text-align: center;
+  padding: 0 1em;
+  margin-bottom: 1.4em;
+  font-size: 1em;
+}
+/*
+
+- White: hsl(0, 0%, 100%)
+- Light gray: hsl(212, 45%, 89%)
+- Grayish blue: hsl(220, 15%, 55%)
+- Dark blue: hsl(218, 44%, 22%)
+
+
+*/
+
+/*
+
+media query
+
+- Mobile: 375px
+- Desktop: 1440px
+
+
+
+*/
