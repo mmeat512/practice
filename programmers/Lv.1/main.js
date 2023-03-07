@@ -40,9 +40,45 @@
       binaryMap[0].push(binary1);
       binaryMap[1].push(binary2);
     }
-    console.log(binaryMap);
+    // console.log(binaryMap);
     return answer;
   }
-  result(solution2, 5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]);
-  result(solution2, 6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10]);
+  // result(solution2, 5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]);
+  // result(solution2, 6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10]);
+
+  /** 과일장수 */
+  function solution3(k, m, score) {
+    var answer = 0;
+    let boxIndex = 0;
+    /* 
+    1. score 오름차순 
+    2. m개씩 자르기
+    3. p원으로 계산 
+    4. 이익 구하기 
+    */
+
+    score.sort((a, b) => b - a);
+    /** 시간초과로 통과하지 못한 풀이 : splice 함수를 사용하여 나타난 현상 
+      while (true) {
+        if (score.length < m) break;
+        const appleBox = score.splice(0, m);
+        answer += Math.min(...appleBox) * m;
+      }
+    */
+
+    while (boxIndex <= score.length) {
+      /* slice 에서 두번째 인자가 array.length 보다 클 경우 배열 끝까지 추출한다. */
+      /* https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice */
+      const appleBox = score.slice(boxIndex, boxIndex + m);
+      if (appleBox.length === m) {
+        answer += Math.min(...appleBox) * m;
+      }
+      boxIndex += m;
+    }
+
+    return answer;
+  }
+
+  result(solution3, 3, 4, [1, 2, 3, 1, 2, 3, 1]);
+  result(solution3, 4, 3, [4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2]);
 })();
