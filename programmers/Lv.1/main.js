@@ -41,8 +41,6 @@
 
     return binaryMap.map((item) => item.join(''));
   }
-  result(solution2, 5, [9, 20, 28, 18, 11], [30, 1, 21, 17, 28]);
-  result(solution2, 6, [46, 33, 33, 22, 31, 50], [27, 56, 19, 14, 14, 10]);
 
   /** 과일장수 */
   function solution3(k, m, score) {
@@ -77,6 +75,23 @@
     return answer;
   }
 
-  // result(solution3, 3, 4, [1, 2, 3, 1, 2, 3, 1]);
-  // result(solution3, 4, 3, [4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2]);
+  /** k번째수 */
+  function solution4(array, commands) {
+    var answer = [];
+    for (let i = 0; i < commands.length; i++) {
+      const newArray = array
+        .slice(commands[i][0] - 1, commands[i][1])
+        .sort((a, b) => a - b);
+      answer.push(newArray[commands[i][2] - 1]);
+    }
+    return answer;
+  }
+
+  /** 두 개 뽑아서 더하기 */
+  function solution5(numbers) {
+    var answer = [];
+    return answer;
+  }
+  result(solution5, [2, 1, 3, 4, 1]);
+  result(solution5, [5, 0, 2, 7]);
 })();
