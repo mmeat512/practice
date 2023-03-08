@@ -90,8 +90,21 @@
   /** 두 개 뽑아서 더하기 */
   function solution5(numbers) {
     var answer = [];
-    return answer;
+    numbers.sort((a, b) => a - b);
+    for (let i = 0; i < numbers.length; i++) {
+      for (let j = i + 1; j < numbers.length; j++) {
+        const sumNumber = numbers[i] + numbers[j];
+        if (!answer.includes(sumNumber)) answer.push(sumNumber);
+      }
+    }
+
+    /** 정답 풀이 다른사람 코드 참고
+     * Set 이란 ?
+     * Set 객체는 값 콜렉션으로, 삽입 순서대로 요소를 순회할 수 있습니다. 하나의 Set 내 값은 한 번만 나타날 수 있습니다. 즉, 어떤 값은 그 Set 콜렉션 내에서 유일합니다.
+     * 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Set
+     *
+     * const answer = [...new Set(temp)]
+     */
+    return answer.sort((a, b) => a - b);
   }
-  result(solution5, [2, 1, 3, 4, 1]);
-  result(solution5, [5, 0, 2, 7]);
 })();
