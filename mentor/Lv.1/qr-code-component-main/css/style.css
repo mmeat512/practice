@@ -5,14 +5,23 @@ body {
 }
 
 .qr-code-wrap {
-  /* display: flex; */
-  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.qr-code-box {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
   width: 290px;
+  height: fit-content;
   border-radius: 1rem;
   padding: 1em;
   background: hsl(0, 0%, 100%);
   margin-bottom: 1em;
-  transform: translate(50%, 50%);
+  box-shadow: 1px 1px 5px hsl(218, 44%, 22%);
 }
 
 .qr-code-wrap img {
@@ -50,6 +59,16 @@ media query
 - Mobile: 375px
 - Desktop: 1440px
 
-
-
 */
+
+@media (width >= 1440px) {
+  .qr-code-wrap {
+    height: 100vh;
+  }
+}
+/* 가로모드일 경우 */
+@media (375px <= width < 1440px) and (orientation: landscape) {
+  .qr-code-wrap {
+    height: auto;
+  }
+}
