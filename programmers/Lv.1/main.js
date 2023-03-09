@@ -123,4 +123,18 @@
     }
     return arr.length;
   }
+
+  /** 콜라 문제 */
+  function solution7(a, b, n) {
+    var answer = 0;
+    let cola = n;
+    while (cola >= a) {
+      answer += Math.floor(cola / a) * b;
+      if (cola % a === 0) cola = Math.floor(cola / a) * b;
+      else cola = Math.floor(cola / a) * b + (cola % a);
+    }
+    return answer;
+  }
+  // result(solution7, 2, 1, 20);
+  // result(solution7, 3, 1, 20);
 })();
