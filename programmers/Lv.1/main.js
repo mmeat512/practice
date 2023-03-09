@@ -107,4 +107,20 @@
      */
     return answer.sort((a, b) => a - b);
   }
+
+  /** 크기가 작은 부분문자열 */
+  function solution6(t, p) {
+    const pLength = p.length;
+    const arr = [];
+    for (let i = 0; i < t.length; i++) {
+      const sliceStr = t.slice(i, i + pLength);
+      /**
+       * String * 1 => Number
+       * +String => Number
+       * */
+      if (sliceStr.length === pLength && sliceStr * 1 <= p * 1)
+        arr.push(sliceStr);
+    }
+    return arr.length;
+  }
 })();
