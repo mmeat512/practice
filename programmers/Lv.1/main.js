@@ -137,4 +137,12 @@
   }
   // result(solution7, 2, 1, 20);
   // result(solution7, 3, 1, 20);
+
+  /** 푸드 파이트 대회 */
+  function solution8(food) {
+    var answer = '';
+    return answer;
+  }
+  result(solution8, [1, 3, 4, 6]);
+  result(solution8, [1, 7, 1, 2]);
 })();
