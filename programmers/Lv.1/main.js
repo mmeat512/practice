@@ -141,6 +141,10 @@
   /** 푸드 파이트 대회 */
   function solution8(food) {
     var answer = '';
+    for (let i = 0; i < food.length; i++) {
+      if (food[i] % 2 == 0) {
+      }
+    }
     return answer;
   }
   result(solution8, [1, 3, 4, 6]);
