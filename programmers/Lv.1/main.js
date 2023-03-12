@@ -140,12 +140,24 @@
 
   /** 푸드 파이트 대회 */
   function solution8(food) {
-    var answer = '';
+    let answer = '';
+    let reverse = '';
     for (let i = 0; i < food.length; i++) {
-      if (food[i] % 2 == 0) {
+      const num = Math.floor(food[i] / 2);
+      if (num > 0) {
+        for (let j = 0; j < num; j++) {
+          answer += i;
+        }
       }
     }
-    return answer;
+    for (let k = answer.length; k >= 0; k--) {
+      reverse += answer.charAt(k);
+    }
+    /** 다른사람 풀이 참고
+     *  String.repeat() 함수 이용
+     * 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
+     */
+    return answer + '0' + reverse;
   }
   result(solution8, [1, 3, 4, 6]);
   result(solution8, [1, 7, 1, 2]);
