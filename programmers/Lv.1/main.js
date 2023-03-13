@@ -164,14 +164,25 @@
 
   /** 2016년 */
   function solution9(a, b) {
-    const day = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    // const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    // for (let i = 0; i < a - 1; i++) {
-    //   b += days[i];
-    // }
-    // answer = day[(b % day.length) - 1];
-    const date = new Date(`2016-${a}-${b}`);
-    return day[date.getDay()];
+    const day = ['FRI', 'SAT', 'SUN', 'MON', 'TUE', 'WED', 'THU'];
+    const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    for (let i = 0; i < a - 1; i++) {
+      b += days[i];
+    }
+    return day[b % day.length === 0 ? 6 : (b % day.length) - 1];
+
+    /** Date 객체 사용 */
+    // const day = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    // const date = new Date(`2016-${a}-${b}`);
+    // return day[date.getDay()];
   }
   result(solution9, 5, 24);
+  result(solution9, 5, 25);
+  result(solution9, 5, 26);
+  result(solution9, 5, 27);
+  result(solution9, 5, 28);
+  result(solution9, 5, 29);
+  result(solution9, 5, 30);
+  result(solution9, 5, 31);
+  result(solution9, 6, 1);
 })();
