@@ -159,6 +159,19 @@
      */
     return answer + '0' + reverse;
   }
-  result(solution8, [1, 3, 4, 6]);
-  result(solution8, [1, 7, 1, 2]);
+  // result(solution8, [1, 3, 4, 6]);
+  // result(solution8, [1, 7, 1, 2]);
+
+  /** 2016년 */
+  function solution9(a, b) {
+    const day = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    // const days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    // for (let i = 0; i < a - 1; i++) {
+    //   b += days[i];
+    // }
+    // answer = day[(b % day.length) - 1];
+    const date = new Date(`2016-${a}-${b}`);
+    return day[date.getDay()];
+  }
+  result(solution9, 5, 24);
 })();
