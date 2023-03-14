@@ -176,13 +176,21 @@
     // const date = new Date(`2016-${a}-${b}`);
     // return day[date.getDay()];
   }
-  result(solution9, 5, 24);
-  result(solution9, 5, 25);
-  result(solution9, 5, 26);
-  result(solution9, 5, 27);
-  result(solution9, 5, 28);
-  result(solution9, 5, 29);
-  result(solution9, 5, 30);
-  result(solution9, 5, 31);
-  result(solution9, 6, 1);
+  // result(solution9, 5, 24);
+
+  /** 가장 가까운 같은 글자 */
+  function solution10(s) {
+    var answer = [];
+    for (let i = 0; i < s.length; i++) {
+      const aheadStr = s.slice(0, i);
+      if (-1 !== aheadStr.lastIndexOf(s.charAt(i))) {
+        answer.push(aheadStr.length - aheadStr.lastIndexOf(s.charAt(i)));
+      } else {
+        answer.push(aheadStr.lastIndexOf(s.charAt(i)));
+      }
+    }
+    return answer;
+  }
+  result(solution10, 'banana');
+  result(solution10, 'foobar');
 })();
