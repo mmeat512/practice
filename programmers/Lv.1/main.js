@@ -191,6 +191,25 @@
     }
     return answer;
   }
-  result(solution10, 'banana');
-  result(solution10, 'foobar');
+  // result(solution10, 'banana');
+  // result(solution10, 'foobar');
+
+  /** 폰켓몬 */
+  function solution11(nums) {
+    const select = [];
+    for (let i = 0; i < nums.length; i++) {
+      if (select.length === nums.length / 2) break;
+      if (!select.includes(nums[i])) select.push(nums[i]);
+    }
+
+    /**
+     * 다른사람 풀이
+     * const arr = [...new Set(nums)];
+     * Set은 어떤 값이 콜렉션 내에서 유일합니다.
+     */
+    return select.length;
+  }
+  result(solution11, [3, 1, 2, 3]);
+  result(solution11, [3, 3, 3, 2, 2, 4]);
+  result(solution11, [3, 3, 3, 2, 2, 2]);
 })();
