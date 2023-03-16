@@ -209,7 +209,22 @@
      */
     return select.length;
   }
-  result(solution11, [3, 1, 2, 3]);
-  result(solution11, [3, 3, 3, 2, 2, 4]);
-  result(solution11, [3, 3, 3, 2, 2, 2]);
+  // result(solution11, [3, 1, 2, 3]);
+  // result(solution11, [3, 3, 3, 2, 2, 4]);
+  // result(solution11, [3, 3, 3, 2, 2, 2]);
+
+  /** 모의고사 */
+  function solution12(answers) {
+    var answer = [];
+    const wayList = ['1,2,3,4,5,', '2,1,2,3,2,4,2,5,', '3,3,1,1,2,2,4,4,5,5,'];
+    for (let i = 0; i < 3; i++) {
+      const way = wayList[i];
+      // way.repeat(way.length * answers.length)
+
+      console.log(way.repeat(answers.length).split(','));
+    }
+    return answer;
+  }
+  result(solution12, [1, 2, 3, 4, 5]);
+  result(solution12, [1, 3, 2, 4, 2]);
 })();
