@@ -215,15 +215,40 @@
 
   /** 모의고사 */
   function solution12(answers) {
-    var answer = [];
-    const wayList = ['1,2,3,4,5,', '2,1,2,3,2,4,2,5,', '3,3,1,1,2,2,4,4,5,5,'];
-    for (let i = 0; i < 3; i++) {
-      const way = wayList[i];
-      // way.repeat(way.length * answers.length)
-
-      console.log(way.repeat(answers.length).split(','));
+    const wayList = [
+      {
+        index: 1,
+        way: [1, 2, 3, 4, 5],
+        correct: 0,
+      },
+      {
+        index: 2,
+        way: [2, 1, 2, 3, 2, 4, 2, 5],
+        correct: 0,
+      },
+      {
+        index: 3,
+        way: [3, 3, 1, 1, 2, 2, 4, 4, 5, 5],
+        correct: 0,
+      },
+    ];
+    for (let i = 0; i < wayList.length; i++) {
+      const way = wayList[i].way;
+      for (let j = 0; j < answers.length; j++) {
+        /**
+         * index를 만들어 index라 way.length랑 같을 시 0으로 초기화하도록 만들었음.
+         *  => 결국엔 j%way.length와 동일함.
+         */
+        if (way[j % way.length] === answers[j]) wayList[i].correct++;
+      }
     }
-    return answer;
+
+    const highScore = Math.max(...wayList.map((item) => item.correct));
+
+    return wayList
+      .filter((item) => highScore === item.correct && 0 !== item.correct)
+      .map((item) => item.index)
+      .sort((a, b) => a - b);
   }
   result(solution12, [1, 2, 3, 4, 5]);
   result(solution12, [1, 3, 2, 4, 2]);
