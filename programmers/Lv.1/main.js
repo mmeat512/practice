@@ -254,18 +254,26 @@
   // result(solution12, [1, 3, 2, 4, 2]);
 
   /** 소수 만들기 */
+  function checkPrimeNumer(num) {
+    let a = 0;
+    for (let i = 1; i <= num; i++) {
+      if (num % i === 0) a++;
+    }
+    return a === 2;
+  }
   function solution13(nums) {
-    var answer = -1;
+    var answer = 0;
+    nums.sort((a, b) => a - b);
     for (let i = 0; i < nums.length; i++) {
       for (let j = i + 1; j < nums.length; j++) {
-        for (let k = j + 1; k < nums.length; k++) {}
+        for (let k = j + 1; k < nums.length; k++) {
+          if (checkPrimeNumer(nums[i] + nums[j] + nums[k])) answer++;
+        }
       }
     }
-    // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    console.log('Hello Javascript');
-
     return answer;
   }
+
   result(solution13, [1, 2, 3, 4]);
   result(solution13, [1, 2, 7, 6, 4]);
 })();
