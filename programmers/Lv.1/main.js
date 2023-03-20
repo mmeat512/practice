@@ -273,7 +273,24 @@
     }
     return answer;
   }
+  // result(solution13, [1, 2, 3, 4]);
+  // result(solution13, [1, 2, 7, 6, 4]);
 
-  result(solution13, [1, 2, 3, 4]);
-  result(solution13, [1, 2, 7, 6, 4]);
+  /** 실패율 */
+  function solution14(N, stages) {
+    var answer = [];
+    let stage = stages.length;
+    for (let i = 1; i <= N; i++) {
+      const fail = stages.filter((item) => item === i).length;
+      answer.push({
+        fail: fail / stage,
+        index: i - 0,
+      });
+      stage = stage - fail;
+    }
+
+    return answer.sort((a, b) => b.fail - a.fail).map((item) => item.index);
+  }
+  result(solution14, 5, [2, 1, 2, 6, 2, 4, 3, 3]);
+  result(solution14, 4, [4, 4, 4, 4, 4]);
 })();
