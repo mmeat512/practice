@@ -291,6 +291,23 @@
 
     return answer.sort((a, b) => b.fail - a.fail).map((item) => item.index);
   }
-  result(solution14, 5, [2, 1, 2, 6, 2, 4, 3, 3]);
-  result(solution14, 4, [4, 4, 4, 4, 4]);
+  // result(solution14, 5, [2, 1, 2, 6, 2, 4, 3, 3]);
+  // result(solution14, 4, [4, 4, 4, 4, 4]);
+
+  /** 명예의 전당 (1) */
+  function solution15(k, score) {
+    var answer = [];
+    let bestScore = [];
+    for (let i = 0; i < score.length; i++) {
+      bestScore.push(score[i]);
+      if (bestScore.length === k + 1) {
+        bestScore.sort((a, b) => b - a);
+        bestScore.pop();
+      }
+      answer.push(Math.min(...bestScore));
+    }
+    return answer;
+  }
+  result(solution15, 3, [10, 100, 20, 150, 1, 100, 200]);
+  result(solution15, 4, [0, 300, 40, 300, 20, 70, 150, 50, 500, 1000]);
 })();
