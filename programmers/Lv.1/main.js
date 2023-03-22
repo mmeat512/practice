@@ -308,6 +308,50 @@
     }
     return answer;
   }
-  result(solution15, 3, [10, 100, 20, 150, 1, 100, 200]);
-  result(solution15, 4, [0, 300, 40, 300, 20, 70, 150, 50, 500, 1000]);
+  // result(solution15, 3, [10, 100, 20, 150, 1, 100, 200]);
+  // result(solution15, 4, [0, 300, 40, 300, 20, 70, 150, 50, 500, 1000]);
+
+  /** [1차] 다트게임 */
+  function solution16(dartResult) {
+    var answer = 0;
+    const dartResultList = dartResult.split('');
+    const bonus = ['S', 'D', 'T'];
+    const option = ['*', '#'];
+    // console.log(dartResultList);
+    /**
+     * Math.pow()사용
+     * 참고 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
+     */
+    let prevResult = [];
+    for (let i = 0; i < dartResultList.length; i++) {
+      const result = dartResultList[i];
+      if (option.includes(result)) {
+        if (result === '*') {
+          for (let j = prevResult.length - 1; j >= prevResult.length - 2; j--) {
+            prevResult[j] = prevResult[j] * 2;
+          }
+        } else {
+          prevResult[prevResult.length - 1] =
+            prevResult[prevResult.length - 1] * -1;
+        }
+      } else if (bonus.includes(result)) {
+        const num = Math.pow(
+          +prevResult.pop(),
+          result === 'S' ? 1 : result === 'D' ? 2 : 3
+        );
+        prevResult.push(num);
+      } else if (typeof +result === 'number') {
+        prevResult.push(result);
+      }
+    }
+    console.log(prevResult);
+    return prevResult.reduce((acc, cur) => (acc = acc + cur));
+  }
+  result(solution16, '1S2D*3T');
+  result(solution16, '1D2S#10S');
+  result(solution16, '1D2S0T');
+  result(solution16, '1S*2T*3S');
+  result(solution16, '1D#2S*3S');
+  result(solution16, '1T2D3D#');
+  result(solution16, '1D2S3T*');
 })();
