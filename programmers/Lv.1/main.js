@@ -313,7 +313,6 @@
 
   /** [1차] 다트게임 */
   function solution16(dartResult) {
-    var answer = 0;
     const dartResultList = dartResult.split('');
     const bonus = ['S', 'D', 'T'];
     const option = ['*', '#'];
@@ -321,6 +320,9 @@
     /**
      * Math.pow()사용
      * 참고 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
+     *
+     * 정규식 표현 참고
+     * let split = darts[i].match(/(^\d{1,})(S|D|T)(\*|#)?/),
      */
     let prevResult = [];
     for (let i = 0; i < dartResultList.length; i++) {
@@ -335,16 +337,13 @@
             prevResult[prevResult.length - 1] * -1;
         }
       } else if (bonus.includes(result)) {
-        const num = Math.pow(
-          +prevResult.pop(),
-          result === 'S' ? 1 : result === 'D' ? 2 : 3
-        );
+        let n2 = +dartResultList[i - 1];
+        if (+dartResultList[i - 2]) n2 = +dartResultList[i - 2] * 10 + n2;
+        const num = Math.pow(n2, result === 'S' ? 1 : result === 'D' ? 2 : 3);
         prevResult.push(num);
-      } else if (typeof +result === 'number') {
-        prevResult.push(result);
       }
     }
-    console.log(prevResult);
+
     return prevResult.reduce((acc, cur) => (acc = acc + cur));
   }
   result(solution16, '1S2D*3T');
