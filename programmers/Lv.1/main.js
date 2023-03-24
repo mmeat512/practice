@@ -346,11 +346,48 @@
 
     return prevResult.reduce((acc, cur) => (acc = acc + cur));
   }
-  result(solution16, '1S2D*3T');
-  result(solution16, '1D2S#10S');
-  result(solution16, '1D2S0T');
-  result(solution16, '1S*2T*3S');
-  result(solution16, '1D#2S*3S');
-  result(solution16, '1T2D3D#');
-  result(solution16, '1D2S3T*');
+  // result(solution16, '1S2D*3T');
+  // result(solution16, '1D2S#10S');
+  // result(solution16, '1D2S0T');
+  // result(solution16, '1S*2T*3S');
+  // result(solution16, '1D#2S*3S');
+  // result(solution16, '1T2D3D#');
+  // result(solution16, '1D2S3T*');
+
+  /** 로또의 최고 순위와 최저 순위 */
+  function solution17(lottos, win_nums) {
+    let result = new Array(6).fill(false);
+    for (let i = 0; i < lottos.length; i++) {
+      if (win_nums.includes(lottos[i])) result[i] = true;
+    }
+    const length = result.filter((item) => item).length;
+    const zeroLength = lottos.filter((item) => item === 0).length;
+    const ranking = (length) => {
+      switch (length) {
+        case 6:
+          return 1;
+        case 5:
+          return 2;
+        case 4:
+          return 3;
+        case 3:
+          return 4;
+        case 2:
+          return 5;
+        default:
+          return 6;
+      }
+    };
+    return [ranking(length + zeroLength), ranking(length)];
+    /**
+     * 다른 사람 풀이 참고
+     * 랭크 배열 : const rank = [6, 6, 5, 4, 3, 2, 1]; => 해당 배열을 나는 스위치 케이스 문으로 작성
+     * let zeroCount = lottos.filter(v => !v).length; => 0일 경우를 !v (0은 false이기 때문에)로 작성하여 코드를 깔끔하게 작성
+     * let minCount = lottos.filter(v => win_nums.includes(v)).length; => for문을 이용하여 result 배열을 만들었던 부분을 filter로 깔끔하게 사용
+     *
+     */
+  }
+  result(solution17, [44, 1, 0, 0, 31, 25], [31, 10, 45, 1, 6, 19]);
+  result(solution17, [0, 0, 0, 0, 0, 0], [38, 19, 20, 40, 15, 25]);
+  result(solution17, [45, 4, 35, 20, 3, 9], [20, 9, 3, 45, 4, 35]);
 })();
