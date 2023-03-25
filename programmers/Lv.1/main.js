@@ -410,6 +410,15 @@
     }
     return answer;
   }
-  result(solution18, 5, 3, 2);
-  result(solution18, 10, 3, 2);
+  // result(solution18, 5, 3, 2);
+  // result(solution18, 10, 3, 2);
+
+  /** 덧칠하기 */
+  function solution19(n, m, section) {
+    var answer = 0;
+    return answer;
+  }
+  result(solution19, 8, 4, [2, 3, 6]);
+  result(solution19, 5, 4, [1, 3]);
+  result(solution19, 4, 1, [1, 2, 3, 4]);
 })();
