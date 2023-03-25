@@ -387,7 +387,29 @@
      *
      */
   }
-  result(solution17, [44, 1, 0, 0, 31, 25], [31, 10, 45, 1, 6, 19]);
-  result(solution17, [0, 0, 0, 0, 0, 0], [38, 19, 20, 40, 15, 25]);
-  result(solution17, [45, 4, 35, 20, 3, 9], [20, 9, 3, 45, 4, 35]);
+  // result(solution17, [44, 1, 0, 0, 31, 25], [31, 10, 45, 1, 6, 19]);
+  // result(solution17, [0, 0, 0, 0, 0, 0], [38, 19, 20, 40, 15, 25]);
+  // result(solution17, [45, 4, 35, 20, 3, 9], [20, 9, 3, 45, 4, 35]);
+
+  /** 기사단원의 무기 */
+  function solution18(number, limit, power) {
+    var answer = 0;
+    for (let i = 1; i <= number; i++) {
+      let cnt = 0;
+      /**
+       * 약수 구하기 알고리즘 최적화
+       * number의 약수가 1일 때 다른 약수는 number / 1이 되므로 다른 하나의 약수는 number가 된다.
+       * 하나의 약수를 알면 다른 하나의 존재가 보장이 된다.
+       */
+      for (let j = 1; j * j <= i; j++) {
+        if (j * j === i) cnt++;
+        else if (i % j === 0) cnt += 2;
+      }
+      if (cnt > limit) cnt = power;
+      answer += cnt;
+    }
+    return answer;
+  }
+  result(solution18, 5, 3, 2);
+  result(solution18, 10, 3, 2);
 })();
