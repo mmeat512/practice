@@ -436,10 +436,40 @@
      * }
      */
   }
-  result(solution19, 8, 4, [2, 3, 6]);
-  result(solution19, 5, 4, [1, 3]);
-  result(solution19, 4, 1, [1, 2, 3, 4]);
-  result(solution19, 18, 4, [1, 2, 4, 16]);
-  result(solution19, 18, 4, [1, 2, 4, 12, 14, 16]);
-  result(solution19, 18, 18, [1, 2, 4, 16]);
+  // result(solution19, 8, 4, [2, 3, 6]);
+  // result(solution19, 5, 4, [1, 3]);
+  // result(solution19, 4, 1, [1, 2, 3, 4]);
+  // result(solution19, 18, 4, [1, 2, 4, 16]);
+  // result(solution19, 18, 4, [1, 2, 4, 12, 14, 16]);
+  // result(solution19, 18, 18, [1, 2, 4, 16]);
+
+  /** 카드 뭉치 */
+  function solution20(cards1, cards2, goal) {
+    var answer = 'Yes';
+    let cardsOneIndex = 0;
+    let cardsTwoIndex = 0;
+    for (let i = 0; i < goal.length; i++) {
+      if (goal[i] === cards1[cardsOneIndex]) cardsOneIndex++;
+      else if (goal[i] === cards2[cardsTwoIndex]) cardsTwoIndex++;
+      else answer = 'No';
+    }
+    /** shift() 사용해도 느리지 않음!
+     * shift() 란?
+     * 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환한다. 이때, 배열의 원본이 변경된다.
+     * 참고자료 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
+     */
+    return answer;
+  }
+  result(
+    solution20,
+    ['i', 'drink', 'water'],
+    ['want', 'to'],
+    ['i', 'want', 'to', 'drink', 'water']
+  );
+  result(
+    solution20,
+    ['i', 'water', 'drink'],
+    ['want', 'to'],
+    ['i', 'want', 'to', 'drink', 'water']
+  );
 })();
