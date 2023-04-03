@@ -416,9 +416,30 @@
   /** 덧칠하기 */
   function solution19(n, m, section) {
     var answer = 0;
+
+    let paintNum = section[0];
+    for (let i = 0; i < section.length; i++) {
+      if (section[i] < paintNum) continue;
+      if (paintNum > n) break;
+      paintNum = section[i] + m;
+      answer++;
+    }
     return answer;
+
+    /** 다른사람 풀이
+     * var painted = 0;
+     * for (var section of sections) {
+     *  if (painted < section) {
+     *    answer++;
+     *    painted = section + m - 1;
+     *  }
+     * }
+     */
   }
   result(solution19, 8, 4, [2, 3, 6]);
   result(solution19, 5, 4, [1, 3]);
   result(solution19, 4, 1, [1, 2, 3, 4]);
+  result(solution19, 18, 4, [1, 2, 4, 16]);
+  result(solution19, 18, 4, [1, 2, 4, 12, 14, 16]);
+  result(solution19, 18, 18, [1, 2, 4, 16]);
 })();
