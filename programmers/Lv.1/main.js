@@ -460,16 +460,54 @@
      */
     return answer;
   }
+  // result(
+  //   solution20,
+  //   ['i', 'drink', 'water'],
+  //   ['want', 'to'],
+  //   ['i', 'want', 'to', 'drink', 'water']
+  // );
+  // result(
+  //   solution20,
+  //   ['i', 'water', 'drink'],
+  //   ['want', 'to'],
+  //   ['i', 'want', 'to', 'drink', 'water']
+  // );
+
+  /** 추억 점수 */
+  function solution21(name, yearning, photo) {
+    var answer = new Array(photo.length).fill(0);
+    for (let i = 0; i < photo.length; i++) {
+      const picture = photo[i];
+      for (let j = 0; j < name.length; j++) {
+        if (picture.includes(name[j])) answer[i] += yearning[j];
+      }
+    }
+    return answer;
+  }
   result(
-    solution20,
-    ['i', 'drink', 'water'],
-    ['want', 'to'],
-    ['i', 'want', 'to', 'drink', 'water']
+    solution21,
+    ['may', 'kein', 'kain', 'radi'],
+    [5, 10, 1, 3],
+    [
+      ['may', 'kein', 'kain', 'radi'],
+      ['may', 'kein', 'brin', 'deny'],
+      ['kon', 'kain', 'may', 'coni'],
+    ]
   );
   result(
-    solution20,
-    ['i', 'water', 'drink'],
-    ['want', 'to'],
-    ['i', 'want', 'to', 'drink', 'water']
+    solution21,
+    ['kali', 'mari', 'don'],
+    [11, 1, 55],
+    [
+      ['kali', 'mari', 'don'],
+      ['pony', 'tom', 'teddy'],
+      ['con', 'mona', 'don'],
+    ]
+  );
+  result(
+    solution21,
+    ['may', 'kein', 'kain', 'radi'],
+    [5, 10, 1, 3],
+    [['may'], ['kein', 'deny', 'may'], ['kon', 'coni']]
   );
 })();
