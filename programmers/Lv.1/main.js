@@ -484,30 +484,97 @@
     }
     return answer;
   }
+  // result(
+  //   solution21,
+  //   ['may', 'kein', 'kain', 'radi'],
+  //   [5, 10, 1, 3],
+  //   [
+  //     ['may', 'kein', 'kain', 'radi'],
+  //     ['may', 'kein', 'brin', 'deny'],
+  //     ['kon', 'kain', 'may', 'coni'],
+  //   ]
+  // );
+  // result(
+  //   solution21,
+  //   ['kali', 'mari', 'don'],
+  //   [11, 1, 55],
+  //   [
+  //     ['kali', 'mari', 'don'],
+  //     ['pony', 'tom', 'teddy'],
+  //     ['con', 'mona', 'don'],
+  //   ]
+  // );
+  // result(
+  //   solution21,
+  //   ['may', 'kein', 'kain', 'radi'],
+  //   [5, 10, 1, 3],
+  //   [['may'], ['kein', 'deny', 'may'], ['kon', 'coni']]
+  // );
+
+  /** 체육복 */
+  function solution22(n, lost, reserve) {
+    /** Greedy Algorithm
+     * 현재상황에서 가장 좋은 것을 고르는 알고리즘
+     */
+
+    // lost 기준
+    // let possibleReserve = reserve
+    //   .filter((item) => !lost.includes(item))
+    //   .sort((a, b) => a - b);
+    // let possibleStudent = lost
+    //   .filter((item) => !reserve.includes(item))
+    //   .sort((a, b) => a - b);
+
+    // for (let i = 0; i < lost.length; i++) {
+    //   const prev = lost[i] - 1;
+    //   const next = lost[i] + 1;
+    //   let bool = true;
+
+    //   if (possibleReserve.includes(prev)) {
+    //     possibleReserve = possibleReserve.filter((item) => item != prev);
+    //   } else if (possibleReserve.includes(next)) {
+    //     possibleReserve = possibleReserve.filter((item) => item != next);
+    //   } else bool = false;
+
+    //   if (bool)
+    //     possibleStudent = possibleStudent.filter((item) => item != lost[i]);
+    // }
+    // return n - possibleStudent.length;
+
+    let possible = lost
+      .sort((a, b) => a - b)
+      .filter((item) => !reserve.includes(item));
+    reserve = reserve
+      .sort((a, b) => a - b)
+      .filter((item) => !lost.includes(item));
+
+    for (let i = 0; i < reserve.length; i++) {
+      const prev = reserve[i] - 1;
+      const next = reserve[i] + 1;
+      if (possible.includes(prev))
+        possible = possible.filter((item) => item != prev);
+      else if (possible.includes(next))
+        possible = possible.filter((item) => item != next);
+    }
+
+    return n - possible.length;
+  }
+  result(solution22, 5, [2, 4], [1, 3, 5]);
+  result(solution22, 5, [2, 4], [3]);
+  result(solution22, 3, [3], [1]);
+  result(solution22, 5, [1, 2, 3], [1, 2, 5]);
+  // result(solution22, 4, [1, 3], [1, 2]);
+  // result(solution22, 5, [1, 2, 3, 4], [2, 3, 5]);
+  // result(solution22, 5, [2], [5]);
+  // result(solution22, 5, [1, 2, 3], [2, 3, 4]);
+  // result(solution22, 5, [4, 2], [3, 5]);
+  result(solution22, 6, [4, 1, 5], [6, 5]);
+  // 11명
   result(
-    solution21,
-    ['may', 'kein', 'kain', 'radi'],
-    [5, 10, 1, 3],
-    [
-      ['may', 'kein', 'kain', 'radi'],
-      ['may', 'kein', 'brin', 'deny'],
-      ['kon', 'kain', 'may', 'coni'],
-    ]
+    solution22,
+    13,
+    [1, 2, 5, 6, 10, 12, 13],
+    [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]
   );
-  result(
-    solution21,
-    ['kali', 'mari', 'don'],
-    [11, 1, 55],
-    [
-      ['kali', 'mari', 'don'],
-      ['pony', 'tom', 'teddy'],
-      ['con', 'mona', 'don'],
-    ]
-  );
-  result(
-    solution21,
-    ['may', 'kein', 'kain', 'radi'],
-    [5, 10, 1, 3],
-    [['may'], ['kein', 'deny', 'may'], ['kon', 'coni']]
-  );
+  result(solution22, 13, [1, 6, 13], [3, 4, 7, 8, 9, 11]);
 })();
