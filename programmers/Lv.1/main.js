@@ -559,22 +559,62 @@
 
     return n - possible.length;
   }
-  result(solution22, 5, [2, 4], [1, 3, 5]);
-  result(solution22, 5, [2, 4], [3]);
-  result(solution22, 3, [3], [1]);
-  result(solution22, 5, [1, 2, 3], [1, 2, 5]);
+  // result(solution22, 5, [2, 4], [1, 3, 5]);
+  // result(solution22, 5, [2, 4], [3]);
+  // result(solution22, 3, [3], [1]);
+  // result(solution22, 5, [1, 2, 3], [1, 2, 5]);
   // result(solution22, 4, [1, 3], [1, 2]);
   // result(solution22, 5, [1, 2, 3, 4], [2, 3, 5]);
   // result(solution22, 5, [2], [5]);
   // result(solution22, 5, [1, 2, 3], [2, 3, 4]);
   // result(solution22, 5, [4, 2], [3, 5]);
-  result(solution22, 6, [4, 1, 5], [6, 5]);
+  // result(solution22, 6, [4, 1, 5], [6, 5]);
   // 11명
-  result(
-    solution22,
-    13,
-    [1, 2, 5, 6, 10, 12, 13],
-    [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]
-  );
-  result(solution22, 13, [1, 6, 13], [3, 4, 7, 8, 9, 11]);
+  // result(
+  //   solution22,
+  //   13,
+  //   [1, 2, 5, 6, 10, 12, 13],
+  //   [2, 3, 4, 5, 7, 8, 9, 10, 11, 12]
+  // );
+  // result(solution22, 13, [1, 6, 13], [3, 4, 7, 8, 9, 11]);
+
+  /** 숫자 짝궁 */
+  function solution23(X, Y) {
+    var answer = '';
+    const mate = [];
+    let mateIndex = {};
+    /** 2중배열 사용 시 11번 ~ 15번 시간초과 */
+    // for (let i = 0; i < X.length; i++) {
+    //   for (let j = 0; j < Y.length; j++) {
+    //     if (X[i] !== Y[j]) continue;
+    //     else {
+    //       if (mateIndex.includes(j)) continue;
+    //       mate.push(X[i]);
+    //       console.log(`(${i}, ${j}) - X: ${X[i]} / Y: ${Y[j]}`);
+    //       mateIndex.push(j);
+    //       break;
+    //     }
+    //   }
+    // }
+    const standard = X.length > Y.length ? Y : X;
+    for (let i = 0; i < standard.length; i++) {
+      const compare = standard === X ? Y : X;
+      const value = standard[i];
+      const index = mate.includes(value) ? mateIndex[value] : 0;
+      if (compare.includes(value, index)) {
+        mate.push(value);
+        mateIndex[value] = compare.indexOf(value, index) + 1;
+      }
+    }
+    mate.sort((a, b) => b - a);
+    if (mate.length < 1) answer = '-1';
+    else if (mate[0] === '0') answer = '0';
+    else answer = mate.join('');
+    return answer;
+  }
+  result(solution23, '100', '2345');
+  result(solution23, '100', '203045');
+  result(solution23, '100', '123450');
+  result(solution23, '12321', '42531');
+  result(solution23, '5525', '1255');
 })();
