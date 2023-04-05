@@ -583,19 +583,6 @@
     var answer = '';
     const mate = [];
     let mateIndex = {};
-    /** 2중배열 사용 시 11번 ~ 15번 시간초과 */
-    // for (let i = 0; i < X.length; i++) {
-    //   for (let j = 0; j < Y.length; j++) {
-    //     if (X[i] !== Y[j]) continue;
-    //     else {
-    //       if (mateIndex.includes(j)) continue;
-    //       mate.push(X[i]);
-    //       console.log(`(${i}, ${j}) - X: ${X[i]} / Y: ${Y[j]}`);
-    //       mateIndex.push(j);
-    //       break;
-    //     }
-    //   }
-    // }
     const standard = X.length > Y.length ? Y : X;
     for (let i = 0; i < standard.length; i++) {
       const compare = standard === X ? Y : X;
@@ -612,9 +599,49 @@
     else answer = mate.join('');
     return answer;
   }
-  result(solution23, '100', '2345');
-  result(solution23, '100', '203045');
-  result(solution23, '100', '123450');
-  result(solution23, '12321', '42531');
-  result(solution23, '5525', '1255');
+  // result(solution23, '100', '2345');
+  // result(solution23, '100', '203045');
+  // result(solution23, '100', '123450');
+  // result(solution23, '12321', '42531');
+  // result(solution23, '5525', '1255');
+
+  /** 완주하지 못한 선수 */
+  function solution24(participant, completion) {
+    var answer = '';
+    const list = {};
+    for (const name of participant) {
+      list[name] = (list[name] || 0) + 1;
+    }
+
+    for (const name of completion) {
+      if (list[name]) list[name]--;
+    }
+
+    for (const [key, value] of Object.entries(list)) {
+      if (value === 1) {
+        answer = key;
+        break;
+      }
+    }
+    /** 자바스크립트에서 배열은 객체이기 때문에 arr[key] = 'value' 로 작성해도 에러가 나지 않는다.
+     * 또한 arr[key]를 출력해보면 'value' 값이 나올 것이다.
+     *
+     * 배열이라고 해서 key-value 값을 이용하지 못한다고 생각하지 말기.
+     * 하지만 해당 값은 배열의 요소가 아니기 때문에 for문으로 값을 뽑아내지 못함. (배열의 속성)
+     * ['leo', 'kiki', 'eden', eden: 1, kiki: 1]
+     */
+
+    return answer;
+  }
+  result(solution24, ['leo', 'kiki', 'eden'], ['eden', 'kiki']);
+  result(
+    solution24,
+    ['marina', 'josipa', 'nikola', 'vinko', 'filipa'],
+    ['josipa', 'filipa', 'marina', 'nikola']
+  );
+  result(
+    solution24,
+    ['mislav', 'stanko', 'mislav', 'ana'],
+    ['stanko', 'ana', 'mislav']
+  );
 })();
