@@ -633,15 +633,47 @@
 
     return answer;
   }
-  result(solution24, ['leo', 'kiki', 'eden'], ['eden', 'kiki']);
-  result(
-    solution24,
-    ['marina', 'josipa', 'nikola', 'vinko', 'filipa'],
-    ['josipa', 'filipa', 'marina', 'nikola']
-  );
-  result(
-    solution24,
-    ['mislav', 'stanko', 'mislav', 'ana'],
-    ['stanko', 'ana', 'mislav']
-  );
+  // result(solution24, ['leo', 'kiki', 'eden'], ['eden', 'kiki']);
+  // result(
+  //   solution24,
+  //   ['marina', 'josipa', 'nikola', 'vinko', 'filipa'],
+  //   ['josipa', 'filipa', 'marina', 'nikola']
+  // );
+  // result(
+  //   solution24,
+  //   ['mislav', 'stanko', 'mislav', 'ana'],
+  //   ['stanko', 'ana', 'mislav']
+  // );
+
+  /** 옹알이 */
+  function solution25(babbling) {
+    var answer = 0;
+    const possibleWord = ['aya', 'ye', 'woo', 'ma'];
+    const impossibleWord = ['ayaaya', 'yeye', 'woowoo', 'mama'];
+    for (let i = 0; i < babbling.length; i++) {
+      let word = babbling[i];
+      let bool = true;
+      while (bool) {
+        for (let j = 0; j < impossibleWord.length; j++) {
+          if (word.includes(impossibleWord[j])) bool = false;
+          else {
+            bool = false;
+          }
+        }
+        for (let j = 0; j < possibleWord.length; j++) {
+          if (word.includes(possibleWord[j]))
+            word = word.replace(possibleWord[j], '');
+          else {
+            bool = false;
+          }
+        }
+
+        if (word === '') answer++;
+      }
+      console.log(word);
+    }
+    return answer;
+  }
+  result(solution25, ['aya', 'yee', 'u', 'maa']);
+  result(solution25, ['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa']);
 })();
