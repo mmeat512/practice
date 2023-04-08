@@ -649,31 +649,34 @@
   function solution25(babbling) {
     var answer = 0;
     const possibleWord = ['aya', 'ye', 'woo', 'ma'];
-    const impossibleWord = ['ayaaya', 'yeye', 'woowoo', 'mama'];
     for (let i = 0; i < babbling.length; i++) {
       let word = babbling[i];
-      let bool = true;
-      while (bool) {
-        for (let j = 0; j < impossibleWord.length; j++) {
-          if (word.includes(impossibleWord[j])) bool = false;
-          else {
-            bool = false;
-          }
-        }
+      while (possibleWord.some((item) => word.includes(item))) {
         for (let j = 0; j < possibleWord.length; j++) {
-          if (word.includes(possibleWord[j]))
-            word = word.replace(possibleWord[j], '');
-          else {
-            bool = false;
+          if (
+            -1 !== word.indexOf(possibleWord[j]) &&
+            +word[word.indexOf(possibleWord[j]) - 1] === j + 1
+          ) {
+            word = word.replace(possibleWord[j], 'x');
+          } else if (word.includes(possibleWord[j])) {
+            word = word.replace(possibleWord[j], j + 1);
           }
         }
-
-        if (word === '') answer++;
       }
-      console.log(word);
+      if (+word) answer++;
     }
+
+    /** 정규식 참고
+     *  const regexp1 = /(aya|ye|woo|ma)\1+/;
+     *  const regexp2 = /^(aya|ye|woo|ma)+$/;
+     *
+     * return babbling.reduce((ans, word) => (
+     *  !regexp1.test(word) && regexp2.test(word) ? ++ans : ans), 0);
+     */
     return answer;
   }
-  result(solution25, ['aya', 'yee', 'u', 'maa']);
-  result(solution25, ['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa']);
+  // result(solution25, ['aya', 'yee', 'u', 'maa']);
+  // result(solution25, ['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa']);
+  result(solution25, ['ayayeaya', 'ayayeye']);
+  // result(solution25, ['ayayeayayeayaaya']);
 })();
