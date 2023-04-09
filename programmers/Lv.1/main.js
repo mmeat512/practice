@@ -677,6 +677,83 @@
   }
   // result(solution25, ['aya', 'yee', 'u', 'maa']);
   // result(solution25, ['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa']);
-  result(solution25, ['ayayeaya', 'ayayeye']);
+  // result(solution25, ['ayayeaya', 'ayayeye']);
   // result(solution25, ['ayayeayayeayaaya']);
+
+  /** 키패드 누르기 */
+  // function getDistance(number, thumb) {
+  //   let returnValue = 0;
+  //   switch (number) {
+  //     case 2:
+  //       if ('*' === thumb || '#' === thumb) returnValue = 4;
+  //       else if (1 === thumb || 3 === thumb || 5 === thumb) returnValue = 1;
+  //       else if (4 === thumb || 6 === thumb || 8 === thumb) returnValue = 2;
+  //       else returnValue = 3;
+  //       break;
+  //     case 5:
+  //       if ('*' === thumb || '#' === thumb) returnValue = 3;
+  //       else if (2 === thumb || 4 === thumb || 6 === thumb || 8 === thumb)
+  //         returnValue = 1;
+  //       else returnValue = 2;
+  //       break;
+  //     case 8:
+  //       if ('*' === thumb || '#' === thumb) returnValue = 2;
+  //       else if (5 === thumb || 7 === thumb || 9 === thumb || 0 === thumb)
+  //         returnValue = 1;
+  //       else if (2 === thumb || 4 === thumb || 6 === thumb) returnValue = 2;
+  //       else returnValue = 3;
+  //       break;
+  //     case 0:
+  //       if ('*' === thumb || '#' === thumb) returnValue = 1;
+  //       else if (8 === thumb) returnValue = 1;
+  //       else if (1 === thumb || 3 === thumb) returnValue = 4;
+  //       else if (2 === thumb || 4 === thumb || 6 === thumb) returnValue = 3;
+  //       else returnValue = 2;
+  //       break;
+  //   }
+  //   return returnValue;
+  // }
+
+  function getDistance(number, thumb) {}
+  function solution26(numbers, hand) {
+    var answer = '';
+    let rightThumb = '#';
+    let leftThumb = '*';
+    const rightInputNumber = [3, 6, 9];
+    const leftInputNumber = [1, 4, 7];
+    for (let number of numbers) {
+      if (rightInputNumber.includes(number)) {
+        answer += 'R';
+        rightThumb = number;
+      } else if (leftInputNumber.includes(number)) {
+        answer += 'L';
+        leftThumb = number;
+      } else {
+        if (
+          getDistance(number, rightThumb) === getDistance(number, leftThumb)
+        ) {
+          if ('right' === hand) {
+            answer += 'R';
+            rightThumb = number;
+          } else {
+            answer += 'L';
+            leftThumb = number;
+          }
+        } else if (
+          getDistance(number, rightThumb) < getDistance(number, leftThumb)
+        ) {
+          answer += 'R';
+          rightThumb = number;
+        } else {
+          answer += 'L';
+          leftThumb = number;
+        }
+      }
+    }
+    return answer;
+  }
+
+  result(solution26, [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right');
+  result(solution26, [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], 'left');
+  result(solution26, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 'right');
 })();
