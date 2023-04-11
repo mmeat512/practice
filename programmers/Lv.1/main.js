@@ -753,36 +753,58 @@
     return answer;
   }
 
-  result(solution26, [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right');
-  result(solution26, [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], 'left');
-  result(solution26, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 'right');
+  // result(solution26, [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right');
+  // result(solution26, [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], 'left');
+  // result(solution26, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], 'right');
 
   /** 크레인 인형뽑기 */
   function solution27(board, moves) {
     var answer = 0;
+    var targetList = [];
     var result = [];
-    moves.map((n) => {
-      var bLen = board.length;
-      for (var i = 0; i < bLen; i++) {
-        if (board[i][n] !== 0) {
-          result.push(board[i][n]);
-          board[i][n] = 0;
+
+    for (let i = 0; i < board.length; i++) {
+      targetList.push(board.map((item) => item[i]));
+    }
+
+    for (let i = 0; i < moves.length; i++) {
+      const target = targetList[moves[i] - 1];
+      for (let j = 0; j < target.length; j++) {
+        if (target[j] !== 0) {
+          const f = result[result.length - 1];
+          if (f === target[j]) {
+            result.pop();
+            answer += 2;
+          } else {
+            result.push(target[j]);
+          }
+          target[j] = 0;
           break;
         }
       }
-    });
+    }
 
-    return result;
+    return answer;
   }
-  // result(
-  //   solution27,
-  //   [
-  //     [0, 0, 0, 0, 0],
-  //     [0, 0, 1, 0, 3],
-  //     [0, 2, 5, 0, 1],
-  //     [4, 2, 4, 4, 2],
-  //     [3, 5, 1, 3, 1],
-  //   ],
-  //   [1, 5, 3, 5, 1, 2, 1, 4]
-  // );
+  result(
+    solution27,
+    [
+      [0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 3],
+      [0, 2, 5, 0, 1],
+      [4, 2, 4, 4, 2],
+      [3, 5, 1, 3, 1],
+    ],
+    [1, 5, 3, 5, 1, 2, 1, 4]
+  );
+  result(
+    solution27,
+    [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [1, 2, 3, 4]
+  );
 })();
