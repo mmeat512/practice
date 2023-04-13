@@ -786,25 +786,64 @@
 
     return answer;
   }
-  result(
-    solution27,
-    [
-      [0, 0, 0, 0, 0],
-      [0, 0, 1, 0, 3],
-      [0, 2, 5, 0, 1],
-      [4, 2, 4, 4, 2],
-      [3, 5, 1, 3, 1],
-    ],
-    [1, 5, 3, 5, 1, 2, 1, 4]
-  );
-  result(
-    solution27,
-    [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    [1, 2, 3, 4]
-  );
+  // result(
+  //   solution27,
+  //   [
+  //     [0, 0, 0, 0, 0],
+  //     [0, 0, 1, 0, 3],
+  //     [0, 2, 5, 0, 1],
+  //     [4, 2, 4, 4, 2],
+  //     [3, 5, 1, 3, 1],
+  //   ],
+  //   [1, 5, 3, 5, 1, 2, 1, 4]
+  // );
+  // result(
+  //   solution27,
+  //   [
+  //     [0, 0, 0, 0],
+  //     [0, 0, 0, 0],
+  //     [0, 0, 0, 0],
+  //     [0, 0, 0, 0],
+  //   ],
+  //   [1, 2, 3, 4]
+  // );
+
+  /** 문자열 나누기 */
+  function solution28(s) {
+    var answer = 0;
+    return answer;
+  }
+
+  // result(solution28, 'banana');
+  // result(solution28, 'abracadabra');
+  // result(solution28, 'aaabbaccccabba');
+
+  /** 둘만의 암호 */
+  function solution29(s, skip, index) {
+    // ascii table 97~122
+    var answer = '';
+    const skipList = skip
+      .split('')
+      .map((item) => item.charCodeAt(item))
+      .sort((a, b) => a - b);
+    s;
+    for (let i = 0; i < s.length; i++) {
+      /** String.fromCharCode() */
+      let unicode = s.charCodeAt(i);
+      for (let j = 0; j < index; j++) {
+        unicode = unicode + 1;
+        if (unicode === 123) unicode = 97;
+        if (skipList.includes(unicode)) {
+          j--;
+          continue;
+        }
+      }
+
+      answer += String.fromCharCode(unicode);
+    }
+    return answer;
+  }
+  result(solution29, 'aukks', 'wbqd', 5);
+  result(solution29, 'zzzzz', 'a', 1);
+  result(solution29, 'abcd', 'abcd', 1);
 })();
