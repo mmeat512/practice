@@ -843,7 +843,15 @@
     }
     return answer;
   }
-  result(solution29, 'aukks', 'wbqd', 5);
-  result(solution29, 'zzzzz', 'a', 1);
-  result(solution29, 'abcd', 'abcd', 1);
+  // result(solution29, 'aukks', 'wbqd', 5);
+  // result(solution29, 'zzzzz', 'a', 1);
+  // result(solution29, 'abcd', 'abcd', 1);
+
+  /** 성격 유형 검사하기 */
+  function solution30(survey, choices) {
+    var answer = '';
+    return answer;
+  }
+  result(solution30, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
+  result(solution30, ['TR', 'RT', 'TR'], [7, 1, 3]);
 })();
