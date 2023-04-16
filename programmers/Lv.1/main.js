@@ -850,6 +850,21 @@
   /** 성격 유형 검사하기 */
   function solution30(survey, choices) {
     var answer = '';
+    const keyList = survey.map((item) => {
+      const chList = item.split('');
+      let obj = {};
+      for (let ch of chList) {
+        obj = {
+          ...obj,
+          [ch]: 0,
+        };
+      }
+      return obj;
+    });
+    console.log(keyList);
+    for (let i = 0; i < survey.length; i++) {
+      console.log(`${survey[i]}, ${choices[i]}`);
+    }
     return answer;
   }
   result(solution30, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
