@@ -852,16 +852,10 @@
     var answer = '';
     const list = ['RT', 'TR', 'FC', 'CF', 'MJ', 'JM', 'AN', 'NA'];
     const obj = [
-      {
-        A: 0,
-        C: 0,
-        F: 0,
-        J: 0,
-        N: 0,
-        M: 0,
-        R: 0,
-        T: 0,
-      },
+      { R: 0, T: 0 },
+      { C: 0, F: 0 },
+      { J: 0, M: 0 },
+      { A: 0, N: 0 },
     ];
     const keyList = survey.map((item) => {
       const chList = item.split('');
@@ -877,6 +871,7 @@
     console.log(keyList);
     for (let i = 0; i < survey.length; i++) {
       console.log(`${survey[i]}, ${choices[i]}`);
+
       //  AN
       //  1 ~ 3 : N / 5~7 : A
       switch (choices[i]) {
