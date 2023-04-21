@@ -849,69 +849,95 @@
 
   /** 성격 유형 검사하기 */
   function solution30(survey, choices) {
-    var answer = '';
     const list = ['RT', 'TR', 'FC', 'CF', 'MJ', 'JM', 'AN', 'NA'];
-    const obj = [
+    const objList = [
       { R: 0, T: 0 },
       { C: 0, F: 0 },
       { J: 0, M: 0 },
       { A: 0, N: 0 },
     ];
-    const keyList = survey.map((item) => {
-      const chList = item.split('');
-      let obj = {};
-      for (let ch of chList) {
-        obj = {
-          ...obj,
-          [ch]: 0,
-        };
-      }
-      return obj;
-    });
-    console.log(keyList);
+    // const keyList = survey.map((item) => {
+    //   const chList = item.split('');
+    //   let obj = {};
+    //   for (let ch of chList) {
+    //     obj = {
+    //       ...obj,
+    //       [ch]: 0,
+    //     };
+    //   }
+    //   return obj;
+    // });
+    // console.log(keyList);
     for (let i = 0; i < survey.length; i++) {
-      console.log(`${survey[i]}, ${choices[i]}`);
-
+      // console.log(`${survey[i]}, ${choices[i]}`);
+      const objIndex = Math.floor(list.indexOf(survey[i]) / 2);
+      const obj = objList[objIndex];
+      // console.log(objList[objIndex]);
+      // survey[i];
       //  AN
       //  1 ~ 3 : N / 5~7 : A
       switch (choices[i]) {
         case 1:
           // 3
-          console.log(survey[i][0]);
+          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 3;
           break;
         case 2:
           //2
-          console.log(survey[i][0]);
+          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 2;
           break;
         case 3:
           //1
-          console.log(survey[i][0]);
+          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 1;
           break;
         case 4:
           break;
         case 5:
           //1
-          console.log(survey[i][1]);
+          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 1;
           break;
         case 6:
           //2
-          console.log(survey[i][1]);
+          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 2;
           break;
         case 7:
           //3
-          console.log(survey[i][1]);
+          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 3;
           break;
       }
     }
-    console.log(obj);
-    return answer;
+
+    return objList.reduce((acc, item) => {
+      const values = Object.values(item);
+      // 더 높은 values를 갖고 있는 키 값을 반환
+      return (acc += Object.keys(item)[values.indexOf(Math.max(...values))]);
+    }, '');
   }
-  result(solution30, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
-  result(solution30, ['TR', 'RT', 'TR'], [7, 1, 3]);
+
+  function solution30N(survey, choices) {
+    const MBTI = {};
+    const types = ['RT', 'CF', 'JM', 'AN'];
+
+    types.forEach((type) => type.split('').forEach((char) => (MBTI[char] = 0)));
+
+    choices.forEach((choice, index) => {
+      const [disagree, agree] = survey[index];
+
+      MBTI[choice > 4 ? agree : disagree] += Math.abs(choice - 4);
+    });
+
+    return types
+      .map(([a, b]) => {
+        console.log(a, b);
+        return MBTI[b] > MBTI[a] ? b : a;
+      })
+      .join('');
+  }
+  result(solution30N, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
+  result(solution30N, ['TR', 'RT', 'TR'], [7, 1, 3]);
 })();
