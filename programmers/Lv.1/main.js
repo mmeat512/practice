@@ -919,6 +919,7 @@
     }, '');
   }
 
+  /** 코딩테스트 정답 코드(다른사람) */
   function solution30N(survey, choices) {
     const MBTI = {};
     const types = ['RT', 'CF', 'JM', 'AN'];
@@ -933,11 +934,64 @@
 
     return types
       .map(([a, b]) => {
-        console.log(a, b);
         return MBTI[b] > MBTI[a] ? b : a;
       })
       .join('');
   }
-  result(solution30N, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
-  result(solution30N, ['TR', 'RT', 'TR'], [7, 1, 3]);
+  // result(solution30N, ['AN', 'CF', 'MJ', 'RT', 'NA'], [5, 3, 2, 7, 5]);
+  // result(solution30N, ['TR', 'RT', 'TR'], [7, 1, 3]);
+
+  /** 햄버거 만들기 */
+  function solution31(ingredient) {
+    var answer = 0;
+    const packingOrder = [1, 2, 3, 1];
+    let arr = [];
+
+    // let str = ingredient.join('');
+
+    // while (true) {
+    //   // Array.includes 시간초과 발생
+    //   if (!str.includes('1231')) break;
+    //   str = str.replace('1231', '');
+    //   answer++;
+    // }
+
+    for (let i = 4; i < ingredient.length; i++) {}
+    return answer;
+  }
+  // result(solution31, [2, 1, 1, 2, 3, 1, 2, 3, 1]);
+  // result(solution31, [1, 3, 2, 1, 2, 1, 3, 1, 2]);
+  // result(solution31, [1, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
+
+  /** 구명보트 */
+  function solution32(people, limit) {
+    var answer = 0;
+    people.sort((a, b) => a - b);
+    let i = 0;
+    while (true) {
+      if (people.length === 0) break;
+      if (people[i] + people[people.length - 1] > limit) {
+        people.pop();
+      } else if (people[i] + people[people.length - 1] <= limit) {
+        people.pop();
+        people.shift();
+      }
+      answer++;
+    }
+    return answer;
+  }
+
+  function solution32N(people, limit) {
+    people.sort(function (a, b) {
+      return a - b;
+    });
+    for (var i = 0, j = people.length - 1; i < j; j--) {
+      if (people[i] + people[j] <= limit) i++;
+    }
+    return people.length - i;
+  }
+
+  result(solution32N, [70, 50, 80, 50, 20, 40, 30], 100);
+  result(solution32N, [70, 50, 80, 50], 100);
+  result(solution32N, [70, 80, 50], 100);
 })();
