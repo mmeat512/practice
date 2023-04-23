@@ -856,57 +856,28 @@
       { J: 0, M: 0 },
       { A: 0, N: 0 },
     ];
-    // const keyList = survey.map((item) => {
-    //   const chList = item.split('');
-    //   let obj = {};
-    //   for (let ch of chList) {
-    //     obj = {
-    //       ...obj,
-    //       [ch]: 0,
-    //     };
-    //   }
-    //   return obj;
-    // });
-    // console.log(keyList);
     for (let i = 0; i < survey.length; i++) {
-      // console.log(`${survey[i]}, ${choices[i]}`);
       const objIndex = Math.floor(list.indexOf(survey[i]) / 2);
       const obj = objList[objIndex];
-      // console.log(objList[objIndex]);
-      // survey[i];
-      //  AN
-      //  1 ~ 3 : N / 5~7 : A
       switch (choices[i]) {
         case 1:
-          // 3
-          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 3;
           break;
         case 2:
-          //2
-          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 2;
           break;
         case 3:
-          //1
-          // console.log(survey[i][0]);
           obj[survey[i][0]] = obj[survey[i][0]] + 1;
           break;
         case 4:
           break;
         case 5:
-          //1
-          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 1;
           break;
         case 6:
-          //2
-          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 2;
           break;
         case 7:
-          //3
-          // console.log(survey[i][1]);
           obj[survey[i][1]] = obj[survey[i][1]] + 3;
           break;
       }
@@ -919,7 +890,7 @@
     }, '');
   }
 
-  /** 코딩테스트 정답 코드(다른사람) */
+  /** 성격 유형 검사하기 정답 (다른사람 코드) */
   function solution30N(survey, choices) {
     const MBTI = {};
     const types = ['RT', 'CF', 'JM', 'AN'];
@@ -947,21 +918,43 @@
     const packingOrder = [1, 2, 3, 1];
     let arr = [];
 
-    // let str = ingredient.join('');
-
-    // while (true) {
-    //   // Array.includes 시간초과 발생
-    //   if (!str.includes('1231')) break;
-    //   str = str.replace('1231', '');
-    //   answer++;
-    // }
-
-    for (let i = 4; i < ingredient.length; i++) {}
+    for (let i = 0; i < ingredient.length; i++) {
+      arr.push(ingredient[i]);
+      if (
+        arr[arr.length - 1] === packingOrder[3] &&
+        arr[arr.length - 2] === packingOrder[2] &&
+        arr[arr.length - 3] === packingOrder[1] &&
+        arr[arr.length - 4] === packingOrder[0]
+      ) {
+        arr.pop();
+        arr.pop();
+        arr.pop();
+        arr.pop();
+        answer++;
+      }
+    }
     return answer;
   }
-  // result(solution31, [2, 1, 1, 2, 3, 1, 2, 3, 1]);
-  // result(solution31, [1, 3, 2, 1, 2, 1, 3, 1, 2]);
-  // result(solution31, [1, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
+
+  /** 햄버거 만들기 정답 (다른사람 코드) */
+  function solution31N(ingredient) {
+    let count = 0;
+
+    for (let i = 0; i < ingredient.length; i++) {
+      if (ingredient.slice(i, i + 4).join('') === '1231') {
+        count++;
+        ingredient.splice(i, 4);
+        i -= 3;
+      }
+    }
+
+    return count;
+  }
+
+  result(solution31, [2, 1, 1, 2, 3, 1, 2, 3, 1]);
+  result(solution31, [1, 3, 2, 1, 2, 1, 3, 1, 2]);
+  result(solution31, [1, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
+  result(solution31, [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
 
   /** 구명보트 */
   function solution32(people, limit) {
@@ -981,6 +974,7 @@
     return answer;
   }
 
+  /** 구명보트 정답 (다른사람 코드) */
   function solution32N(people, limit) {
     people.sort(function (a, b) {
       return a - b;
@@ -991,7 +985,7 @@
     return people.length - i;
   }
 
-  result(solution32N, [70, 50, 80, 50, 20, 40, 30], 100);
-  result(solution32N, [70, 50, 80, 50], 100);
-  result(solution32N, [70, 80, 50], 100);
+  // result(solution32N, [70, 50, 80, 50, 20, 40, 30], 100);
+  // result(solution32N, [70, 50, 80, 50], 100);
+  // result(solution32N, [70, 80, 50], 100);
 })();
