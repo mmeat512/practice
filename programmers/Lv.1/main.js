@@ -951,10 +951,10 @@
     return count;
   }
 
-  result(solution31, [2, 1, 1, 2, 3, 1, 2, 3, 1]);
-  result(solution31, [1, 3, 2, 1, 2, 1, 3, 1, 2]);
-  result(solution31, [1, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
-  result(solution31, [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
+  // result(solution31, [2, 1, 1, 2, 3, 1, 2, 3, 1]);
+  // result(solution31, [1, 3, 2, 1, 2, 1, 3, 1, 2]);
+  // result(solution31, [1, 1, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
+  // result(solution31, [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1]);
 
   /** 구명보트 */
   function solution32(people, limit) {
@@ -988,4 +988,43 @@
   // result(solution32N, [70, 50, 80, 50, 20, 40, 30], 100);
   // result(solution32N, [70, 50, 80, 50], 100);
   // result(solution32N, [70, 80, 50], 100);
+
+  /** 달리기 경주 */
+  function solution33(players, callings) {
+    var answer = [];
+    // 시간초과
+    // for (let i = 0; i < callings.length; i++) {
+    //   const index = players.indexOf(callings[i]);
+    //   const temp = players[index - 1];
+    //   players[index - 1] = callings[i];
+    //   players[index] = temp;
+    // }
+    // return players;
+
+    // 시간초과
+    const index = players.reduce(
+      (acc, cur, index) => ({ ...acc, [cur]: index + 1 }),
+      {}
+    );
+    const name = players.reduce(
+      (acc, cur, index) => ({ ...acc, [index + 1]: cur }),
+      {}
+    );
+    for (let i = 0; i < callings.length; i++) {
+      const prevIndex = index[callings[i]]; // 4
+      const prevName = name[prevIndex - 1]; // poe
+      index[prevName]++; //poe : 3
+      index[callings[i]]--; // 4-> 3
+      name[prevIndex] = prevName;
+      name[prevIndex - 1] = callings[i];
+    }
+    console.log(index);
+    console.log(name);
+    return Object.values(name);
+  }
+  result(
+    solution33,
+    ['mumu', 'soe', 'poe', 'kai', 'mine'],
+    ['kai', 'kai', 'mine', 'mine']
+  );
 })();
