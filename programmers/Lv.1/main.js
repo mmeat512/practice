@@ -1002,29 +1002,51 @@
     // return players;
 
     // 시간초과
-    const index = players.reduce(
-      (acc, cur, index) => ({ ...acc, [cur]: index + 1 }),
-      {}
-    );
-    const name = players.reduce(
-      (acc, cur, index) => ({ ...acc, [index + 1]: cur }),
-      {}
-    );
+    // const index = players.reduce(
+    //   (acc, cur, index) => ({ ...acc, [cur]: index + 1 }),
+    //   {}
+    // );
+    // const name = players.reduce(
+    //   (acc, cur, index) => ({ ...acc, [index + 1]: cur }),
+    //   {}
+    // );
+    // for (let i = 0; i < callings.length; i++) {
+    //   const prevIndex = index[callings[i]]; // 4
+    //   const prevName = name[prevIndex - 1]; // poe
+    //   index[prevName]++; //poe : 3
+    //   index[callings[i]]--; // 4-> 3
+    //   name[prevIndex] = prevName;
+    //   name[prevIndex - 1] = callings[i];
+    // }
+
+    const index = new Map();
+    const name = new Map();
+
+    players.forEach((v, i) => {
+      index.set(v, i + 1);
+      name.set(i + 1, v);
+    });
+
     for (let i = 0; i < callings.length; i++) {
-      const prevIndex = index[callings[i]]; // 4
-      const prevName = name[prevIndex - 1]; // poe
-      index[prevName]++; //poe : 3
-      index[callings[i]]--; // 4-> 3
-      name[prevIndex] = prevName;
-      name[prevIndex - 1] = callings[i];
+      const prevIndex = index.get(callings[i]); // 4
+      const prevName = name.get(prevIndex - 1); // poe
+      index.set(prevName, index.get(prevName) + 1); //poe : 3
+      index.set(callings[i], index.get(callings[i]) - 1); // 4-> 3
+      name.set(prevIndex, prevName);
+      name.set(prevIndex - 1, callings[i]);
     }
-    console.log(index);
-    console.log(name);
-    return Object.values(name);
+
+    return [...name.values()];
   }
   result(
     solution33,
     ['mumu', 'soe', 'poe', 'kai', 'mine'],
     ['kai', 'kai', 'mine', 'mine']
   );
+
+  // 공원산책
+  function solution(park, routes) {
+    var answer = [];
+    return answer;
+  }
 })();
