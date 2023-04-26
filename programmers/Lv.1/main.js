@@ -1038,15 +1038,76 @@
 
     return [...name.values()];
   }
-  result(
-    solution33,
-    ['mumu', 'soe', 'poe', 'kai', 'mine'],
-    ['kai', 'kai', 'mine', 'mine']
-  );
+  function solution33N(players, callings) {
+    let maps = {};
+    for (let i = 0; i < players.length; i++) {
+      maps[players[i]] = i;
+    }
+    callings.forEach((v) => {
+      let num = maps[v];
+      let temp = players[num - 1];
+      players[num - 1] = v;
+      players[num] = temp;
+      maps[v]--;
+      maps[players[num]]++;
+    });
+
+    return Object.entries(maps)
+      .sort((a, b) => a[1] - b[1])
+      .map((v) => v[0]);
+  }
+  // result(
+  //   solution33N,
+  //   ['mumu', 'soe', 'poe', 'kai', 'mine'],
+  //   ['kai', 'kai', 'mine', 'mine']
+  // );
 
   // 공원산책
-  function solution(park, routes) {
+  function solution34(park, routes) {
     var answer = [];
+    const wEnd = park[0].length - 1;
+    const hEnd = park.length - 1;
+    let start;
+    let obstacle = [];
+
+    for (let i = 0; i < park.length; i++) {
+      for (let j = 0; j < park[i].length; j++) {
+        if (park[i][j] === 'S') start = [i, j];
+        if (park[i][j] === 'X') obstacle.push([i, j]);
+      }
+    }
+    console.log(obstacle);
+    for (let i = 0; i < routes.length; i++) {
+      const route = routes[i].split(' ');
+      console.log(route);
+      switch (route[0]) {
+        case 'E':
+          if (start[1] + +route[1] <= wEnd) {
+            start[1] = start[1] + +route[1];
+          }
+          break;
+        case 'S':
+          if (start[0] + +route[1] <= hEnd) {
+            start[0] = start[0] + +route[1];
+          }
+          break;
+        case 'W':
+          if (start[1] - +route[1] >= wEnd) {
+            start[1] = start[1] - +route[1];
+          }
+          break;
+        case 'N':
+          if (start[0] - +route[1] >= wEnd) {
+            start[0] = start[0] - +route[1];
+          }
+          break;
+      }
+    }
+    console.log(start);
+
     return answer;
   }
+  result(solution34, ['SOO', 'OOO', 'OOO'], ['E 2', 'S 2', 'W 1']);
+  result(solution34, ['SOO', 'OXX', 'OOO'], ['E 2', 'S 2', 'W 1']);
+  result(solution34, ['OSO', 'OOO', 'OXO', 'OOO'], ['E 2', 'S 3', 'W 1']);
 })();
