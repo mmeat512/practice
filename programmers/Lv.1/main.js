@@ -1069,6 +1069,7 @@
     const hEnd = park.length - 1;
     let start;
     let obstacle = [];
+    let changes = [];
 
     for (let i = 0; i < park.length; i++) {
       for (let j = 0; j < park[i].length; j++) {
@@ -1076,34 +1077,73 @@
         if (park[i][j] === 'X') obstacle.push([i, j]);
       }
     }
-    console.log(obstacle);
+
     for (let i = 0; i < routes.length; i++) {
       const route = routes[i].split(' ');
-      console.log(route);
+      const num = Number(route[1]);
+      // console.log(route);
+      // const old = start;
       switch (route[0]) {
         case 'E':
-          if (start[1] + +route[1] <= wEnd) {
-            start[1] = start[1] + +route[1];
-          }
+          changes.push([0, num]);
+          // let next = start[1] + num;
+          // if (next <= wEnd) {
+          //   if (
+          //     obstacle.every((item) => next <= item[1] && start[0] !== item[0])
+          //   )
+          //     start[1] = next;
+          //   // if (obstacle.includes(start)) {
+          //   //   start[1] = start[1] - +route[1];
+          //   // }
+          // }
           break;
         case 'S':
-          if (start[0] + +route[1] <= hEnd) {
-            start[0] = start[0] + +route[1];
-          }
+          changes.push([num, 0]);
+          // let next2 = start[0] + num;
+          // if (next2 <= hEnd) {
+          //   if (
+          //     obstacle.every((item) => next2 <= item[0] && start[1] !== item[1])
+          //   )
+          //     start[0] = next2;
+          // }
           break;
         case 'W':
-          if (start[1] - +route[1] >= wEnd) {
-            start[1] = start[1] - +route[1];
-          }
+          changes.push([0, -num]);
+          // let next3 = start[1] - num;
+          // if (next3 >= 0) {
+          //   if (
+          //     obstacle.every((item) => next3 >= item[1] && start[0] !== item[0])
+          //   )
+          //     start[1] = next3;
+          // }
           break;
         case 'N':
-          if (start[0] - +route[1] >= wEnd) {
-            start[0] = start[0] - +route[1];
-          }
+          changes.push([-num, 0]);
+          // let next4 = start[0] - num;
+          // if (next4 >= 0) {
+          //   if (
+          //     obstacle.every((item) => next4 >= item[0] && start[1] !== item[1])
+          //   )
+          //     start[0] = next4;
+          // }
           break;
       }
+      // obstacle.some((coordinates) => {
+
+      //   console.log(coordinates);
+      // });
+      // console.log(start);
     }
-    console.log(start);
+
+    // console.log(changes);
+    changes.reduce(
+      (acc, cur) => {
+        console.log(acc);
+        acc[0] = acc[0] + cur[0];
+        acc[1] = acc[1] + cur[1];
+      },
+      [...start]
+    );
 
     return answer;
   }
