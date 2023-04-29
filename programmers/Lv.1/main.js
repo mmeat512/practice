@@ -1136,14 +1136,37 @@
     }
 
     // console.log(changes);
-    changes.reduce(
-      (acc, cur) => {
-        console.log(acc);
+    const val = changes.reduce(
+      (acc, cur, index, arr) => {
+        // console.log(acc);
+        // console.log(cur);
         acc[0] = acc[0] + cur[0];
         acc[1] = acc[1] + cur[1];
+        if (acc[0] > wEnd || acc[0] < 0) {
+          acc[0] = acc[0] - cur[0];
+          acc[1] = acc[1] - cur[1];
+        } else if (acc[1] > hEnd || acc[1] < 0) {
+          acc[0] = acc[0] - cur[0];
+          acc[1] = acc[1] - cur[1];
+        } else if (
+          obstacle.some((item) => item[0] === acc[0] && item[1] === acc[1])
+        ) {
+          acc[0] = acc[0] - cur[0];
+          acc[1] = acc[1] - cur[1];
+        }
+        console.log(
+          obstacle.some((item) => {
+            console.log(item);
+            console.log(cur);
+            return item[0] === acc[0] && item[1] === acc[1];
+          })
+        );
+        return acc;
       },
+
       [...start]
     );
+    console.log(val);
 
     return answer;
   }
