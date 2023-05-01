@@ -811,12 +811,20 @@
   /** 문자열 나누기 */
   function solution28(s) {
     var answer = 0;
+    for (let i = 0; i < s.length; i++) {
+      for (let j = i + 1; j < s.length; j++) {
+        if (s[i] !== s[j]) {
+          answer++;
+          break;
+        }
+      }
+    }
     return answer;
   }
 
-  // result(solution28, 'banana');
-  // result(solution28, 'abracadabra');
-  // result(solution28, 'aaabbaccccabba');
+  result(solution28, 'banana');
+  result(solution28, 'abracadabra');
+  result(solution28, 'aaabbaccccabba');
 
   /** 둘만의 암호 */
   function solution29(s, skip, index) {
@@ -1170,7 +1178,7 @@
 
     return answer;
   }
-  result(solution34, ['SOO', 'OOO', 'OOO'], ['E 2', 'S 2', 'W 1']);
-  result(solution34, ['SOO', 'OXX', 'OOO'], ['E 2', 'S 2', 'W 1']);
-  result(solution34, ['OSO', 'OOO', 'OXO', 'OOO'], ['E 2', 'S 3', 'W 1']);
+  // result(solution34, ['SOO', 'OOO', 'OOO'], ['E 2', 'S 2', 'W 1']);
+  // result(solution34, ['SOO', 'OXX', 'OOO'], ['E 2', 'S 2', 'W 1']);
+  // result(solution34, ['OSO', 'OOO', 'OXO', 'OOO'], ['E 2', 'S 3', 'W 1']);
 })();
