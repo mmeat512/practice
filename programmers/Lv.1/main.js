@@ -1152,12 +1152,19 @@
           const changeNum = acc[1] + cur[1];
           if (changeNum <= wEnd) {
             // console.log(obstacle);
-            obstacle.every((ob) => {
-              console.log(ob);
-            });
+            if (!obstacle.some((ob) => changeNum < ob[1])) {
+              acc[1] = changeNum;
+            }
           }
         } else if (cur[1] === 0) {
           console.log(`N, S`);
+          const changeNum = acc[0] + cur[0];
+          if (changeNum <= hEnd) {
+            // console.log(obstacle);
+            if (!obstacle.some((ob) => changeNum < ob[0])) {
+              acc[0] = changeNum;
+            }
+          }
         } else {
           console.log(`acc: ${acc}, cur: ${cur}`);
         }
